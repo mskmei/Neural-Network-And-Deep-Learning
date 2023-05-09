@@ -20,7 +20,7 @@ def conv11(input, output, stride):
 
 class Block_resnet(nn.Module):
     enlarge = 1
-    def __init__(self, input, output, stride=1, padding=1, down=None, normalization=None, activate=act):
+    def __init__(self, input, output, stride=1, padding=1, down=None, normalization=None, activate=act, groups=1):
         super(Block_resnet, self).__init__()
         if not normalization:
             normalization = nn.BatchNorm2d
