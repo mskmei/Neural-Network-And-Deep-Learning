@@ -34,7 +34,7 @@ def pos(y, y_pred):
             count+=1
     return count, len(y)
 
-for epoch in tqdm(1, range(EPOCH+1)):
+for epoch in tqdm(range(1, EPOCH+1)):
     train_loss = 0
     val_loss = 0
     if count/10 == 1:
