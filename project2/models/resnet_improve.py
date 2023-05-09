@@ -3,7 +3,7 @@ from torch import nn
 
 act = nn.ReLU(inplace=True)
 
-def conv33(input, output, stride, groups=1, padding=1):
+def conv33(input, output, stride=1, groups=1, padding=1):
     """
     This is a 3x3 convolutional layer with groups = 1 and padding = 1 as default
     This will be widely used in resnet
@@ -11,7 +11,7 @@ def conv33(input, output, stride, groups=1, padding=1):
     conv = nn.Conv2d(input, output, kernel_size=3, stride=stride, padding=padding, groups=groups,bias=False, dilation=padding)
     return conv
 
-def conv11(input, output, stride):
+def conv11(input, output, stride=1):
     """
     in resnet, conv1x1 is widely used to modify dimension
     """
