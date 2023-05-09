@@ -10,7 +10,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 class cutout(object):
     def __init__(self, n, length):
-        self.n_holes = n
+        self.n = n
         self.length = length
 
     def __call__(self, image):
