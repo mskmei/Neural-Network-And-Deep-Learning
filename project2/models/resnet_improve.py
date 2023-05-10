@@ -84,7 +84,7 @@ class ResNet(nn.Module):
                                        groups=self.groups, padding=pre_padding, normalization=self.normalization))
             self.input_channel = channel * Block.enlarge
             for i in range(1, layer_num):
-                append_layers.append(Block(self.input_channel, channel, stride=stride,
+                append_layers.append(Block(self.input_channel, channel,
                                            groups=self.groups, padding=self.padding,
                                            normalization=self.normalization))
             self.rest_layers.append(nn.Sequential(*append_layers))
