@@ -14,7 +14,7 @@ train_loader, validation_loader, test_loader = get_dataloader(batch_size=batch_s
 model = ResNet18()
 model.fc = torch.nn.Linear(512, n_class)  # 将最后的全连接层修改
 
-model.load_state_dict(torch.load('checkpoint/resnet18_cifar10.pt'))
+model.load_state_dict(torch.load('resnet18_best.pt'))
 model = model.to(device)
 
 total_sample = 0
