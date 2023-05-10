@@ -18,7 +18,7 @@ model.fc = torch.nn.Linear(512, n_class)
 model = model.to(device)
 criterion = nn.CrossEntropyLoss().to(device)
 
-EPOCH = 250
+EPOCH = 20
 lower = np.Inf
 accuracy = []
 train_loss_hist = []
