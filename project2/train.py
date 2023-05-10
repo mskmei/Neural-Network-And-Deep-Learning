@@ -9,50 +9,37 @@ import numpy as np
 
 # set device
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-# 读数据
 batch_size = 128
 train_loader,valid_loader,test_loader = get_dataloader(batch_size=batch_size)
-# 加载模型(使用预处理模型，修改最后一层，固定之前的权重)
 n_class = 10
 model = ResNet18()
-"""
-ResNet18网络的7x7降采样卷积和池化操作容易丢失一部分信息,
-所以在实验中我们将7x7的降采样层和最大池化层去掉,替换为一个3x3的降采样卷积,
-同时减小该卷积层的步长和填充大小
-"""
-model.conv1 = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1, bias=False)
-model.fc = torch.nn.Linear(512, n_class) # 将最后的全连接层改掉
+
+model.fc = torch.nn.Linear(512, n_class) 
 model = model.to(device)
-# 使用交叉熵损失函数
 criterion = nn.CrossEntropyLoss().to(device)
 
-# 开始训练
+
 n_epochs = 250
-valid_loss_min = np.Inf # track change in validation loss
+valid_loss_min = np.Inf 
 accuracy = []
 lr = 0.1
 counter = 0
 for epoch in tqdm(range(1, n_epochs+1)):
 
-    # keep track of training and validation loss
     train_loss = 0.0
     valid_loss = 0.0
     total_sample = 0
     right_sample = 0
     
-    # 动态调整学习率
     if counter/10 ==1:
         counter = 0
         lr = lr*0.5
     optimizer = optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=5e-4)
-    ###################
-    # 训练集的模型 #
-    ###################
-    model.train() #作用是启用batch normalization和drop out
+ 
+    model.train() 
     for data, target in train_loader:
         data = data.to(device)
         target = target.to(device)
-        # clear the gradients of all optimized variables（清除梯度）
         optimizer.zero_grad()
         # forward pass: compute predicted outputs by passing inputs to the model
         # (正向传递：通过向模型传递输入来计算预测输出)
