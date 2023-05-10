@@ -94,7 +94,7 @@ class ResNet(nn.Module):
         self.layer4 = self.rest_layers[3]
         self.pooling = nn.AdaptiveAvgPool2d((1,1))
         l = channels[len(append_layers)-1]
-        self.dropout = nn.Dropout(0.5)
+#         self.dropout = nn.Dropout(0.5)
         self.fc = nn.Linear(l*Block.enlarge, n_class)
 
         # Simple initialization, this part was inspired by some open source code
@@ -123,7 +123,7 @@ class ResNet(nn.Module):
         res = self.layer4(res)
         res = self.pooling(res)
         res = torch.flatten(res, 1)
-        res = self.dropout(res)
+#         res = self.dropout(res)
         res = self.fc(res)
         return res
 
