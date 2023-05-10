@@ -59,7 +59,7 @@ for epoch in tqdm(range(1, EPOCH + 1)):
         # convert output probabilities to predicted class(将输出概率转换为预测类)
         _, pred = torch.max(output, 1)
         # compare predictions to true label(将预测与真实标签进行比较)
-        prediction = pred.eq(y.x.view_as(pred))
+        prediction = pred.eq(y.data.view_as(pred))
         # correct = np.squeeze(prediction.to(device).numpy())
         total_sample += batch_size
         for i in prediction:
