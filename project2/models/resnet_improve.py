@@ -84,11 +84,14 @@ class ResNet(nn.Module):
                                        groups=self.groups, padding=pre_padding, normalization=self.normalization))
             self.input_channel = channel * Block.enlarge
             for i in range(1, layer_num):
-                append_layers.append(Block(self.input_channel, channel,
+                append_layers.append(Block(self.input_channel, channel, 
                                            groups=self.groups, padding=self.padding,
                                            normalization=self.normalization))
             self.rest_layers.append(nn.Sequential(*append_layers))
-
+        self.layer1 = self.rest_layers[0]
+        self.layer2 = self.rest_layers[1]
+        self.layer3 = self.rest_layers[2]
+        self.layer4 = self.rest_layers[3]
         self.pooling = nn.AdaptiveAvgPool2d((1,1))
         l = channels[len(append_layers)-1]
         self.fc = nn.Linear(l*Block.enlarge, n_class)
@@ -113,8 +116,10 @@ class ResNet(nn.Module):
         res = self.conv_1(x)
         res = self.batch_norm_1(res)
         res = self.activate(res)
-        for layer in self.rest_layers:
-            res = layer(res)
+        res = self.layer1(res)
+        res = self.layer2(res)
+        res = self.layer3(res)
+        res = self.layer4(res)
         res = self.pooling(res)
         res = torch.flatten(res, 1)
         res = self.fc(res)
@@ -137,6 +142,10 @@ def ResNet18():
 def ResNet34():
     model = ResNet(Block_resnet, layer_number_record['34'])
     return model
+
+
+
+
 
 
 
