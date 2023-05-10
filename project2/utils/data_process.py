@@ -19,7 +19,7 @@ class cutout(object):
 
         mask = np.ones((height, width), np.float32)
 
-        for n in range(self.n):
+        for i in range(self.n):
             u = np.random.randint(height)
             v = np.random.randint(width)
 
