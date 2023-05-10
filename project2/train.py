@@ -70,7 +70,7 @@ for epoch in tqdm(range(1, EPOCH+1)):
     train_loss = train_loss/len(train_loader.sampler)
     val_loss = val_loss/len(validation_loader.sampler)
     print('Epoch: {} \tAcc:{:.6f}\t Training Loss: {:.6f} \tValidation Loss: {:.6f}'.format(
-        epoch, acc, train_loss, valid_loss))
+        epoch, acc, train_loss, val_loss))
     acc_hist.append(acc)
     train_loss_hist.append(train_loss)
     valid_loss_hist.append(val_loss)
