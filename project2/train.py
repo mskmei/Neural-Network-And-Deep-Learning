@@ -68,10 +68,11 @@ for epoch in tqdm(range(1, EPOCH + 1)):
     print("Accuracy:", 100 * right_sample / total_sample, "%")
     accuracy.append(right_sample / total_sample)
 
-    train_loss_hist.append(train_loss)
-    val_loss_hist.append(val_loss)
+
     train_loss = train_loss / len(train_loader.sampler)
     val_loss = val_loss / len(valid_loader.sampler)
+    train_loss_hist.append(train_loss)
+    val_loss_hist.append(val_loss)
 
     # 显示训练集与验证集的损失函数
     print('Epoch: {} \tTraining Loss: {:.6f} \tValidation Loss: {:.6f}'.format(
