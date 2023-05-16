@@ -27,7 +27,8 @@ models_path = os.path.join(home_path, 'reports', 'models')
 # Make sure you are using the right device.
 device_id = device_id
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
-device = torch.device("cuda:{}".format(3) if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda:{}".format(3) if torch.cuda.is_available() else "cpu")
+device = 'gpu'
 print(device)
 # print(torch.cuda.get_device_name(3))
 
