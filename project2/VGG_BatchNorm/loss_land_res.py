@@ -29,7 +29,7 @@ device_id = device_id
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
 device = torch.device("cuda:{}".format(3) if torch.cuda.is_available() else "cpu")
 print(device)
-print(torch.cuda.get_device_name(3))
+# print(torch.cuda.get_device_name(3))
 
 
 
