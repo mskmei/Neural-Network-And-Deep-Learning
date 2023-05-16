@@ -121,7 +121,7 @@ def train(model, optimizer, criterion, train_loader, val_loader, scheduler=None,
 
 # Use this function to plot the final loss landscape,
 # fill the area between the two curves can use plt.fill_between()
-def plot_loss_landscape(step, VGG_max, VGG_min, VGG_BN_max, VGG_BN_min):
+def plot_loss_landscape(step, VGG_max, VGG_min):
     fig = plt.figure()
     plt.style.use('ggplot')
     plt.plot(step, VGG_max,c='green')
@@ -204,7 +204,7 @@ if __name__ == '__main__':
             step.append(i)
 
     # plot_accuracy(np.arange(1, 21), VGG_acc[0], VGG_BN_acc[0])
-
+    print(curve_max, curve_min)
     plot_loss_landscape(step, curve_max,
                         curve_min)
 
